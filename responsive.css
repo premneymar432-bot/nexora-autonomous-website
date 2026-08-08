@@ -1,0 +1,94 @@
+/* =========================================================
+   NEXORA — RESPONSIVE
+   Desktop → Laptop → Tablet → Mobile
+========================================================= */
+
+/* -------- Laptop (≤1200px) -------- */
+@media (max-width: 1200px){
+  :root{ --section-pad: 130px; }
+  .about-grid, .faq-grid, .contact-grid{ gap: 56px; }
+  .services-grid{ gap: 20px; }
+  .stats-grid{ grid-template-columns: repeat(4,1fr); gap: 20px; }
+}
+
+/* -------- Tablet (≤1024px) -------- */
+@media (max-width: 1024px){
+  :root{ --section-pad: 110px; }
+
+  .nav-links{ display:none; }
+  .nav-cta{ display:none; }
+  .hamburger{ display:flex; }
+
+  .about-grid{ grid-template-columns: 1fr; }
+  .about-visual{ max-width: 420px; margin: 0 auto; }
+  .about-cards{ grid-template-columns: 1fr 1fr; }
+
+  .services-grid{ grid-template-columns: 1fr 1fr; }
+
+  .masonry{ columns: 2 220px; }
+
+  .stats-grid{ grid-template-columns: 1fr 1fr; gap: 34px 20px; }
+  .counter-strip{ grid-template-columns: 1fr 1fr; gap: 30px 0; }
+
+  .pricing-grid{ grid-template-columns: 1fr; max-width: 440px; margin-left:auto; margin-right:auto; }
+  .price-card.featured{ transform:none; order:-1; }
+
+  .faq-grid{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns: 1fr; }
+
+  .footer-grid{ grid-template-columns: 1fr 1fr; gap: 40px 20px; }
+
+  .hero-stats-strip{ gap: 30px; }
+}
+
+/* -------- Mobile (≤680px) -------- */
+@media (max-width: 680px){
+  :root{ --section-pad: 84px; }
+
+  body{ cursor:auto; }
+  .cursor-dot, .cursor-ring{ display:none; }
+
+  .section-inner{ padding: 0 22px; }
+
+  .nav-inner{ padding: 0 22px; }
+  .mobile-menu{ padding: 0 22px; }
+  .mobile-menu.open{ padding: 16px 22px 28px; }
+
+  .hero{ padding-top: 100px; }
+  .hero-title{ font-size: clamp(34px, 12vw, 56px); }
+  .hero-sub{ font-size: 15px; }
+  .hero-cta{ flex-direction:column; width:100%; }
+  .hero-cta .btn{ width:100%; }
+
+  .hero-stats-strip{ flex-wrap:wrap; gap: 18px 26px; padding: 18px 16px; }
+  .hero-stats-strip strong{ font-size:16px; }
+
+  .about-cards{ grid-template-columns: 1fr; }
+
+  .services-grid{ grid-template-columns: 1fr; }
+
+  .masonry{ columns: 1; }
+  .masonry-item, .masonry-item.tall{ height: 260px; }
+
+  .stats-grid{ grid-template-columns: 1fr 1fr; gap: 30px 14px; }
+  .progress-ring{ width: 92px; height:92px; }
+  .counter-strip{ grid-template-columns: 1fr 1fr; }
+  .counter{ font-size: 32px; }
+
+  .testi-card{ width: 280px; padding: 26px; }
+
+  .pricing-grid{ max-width:100%; }
+  .price-card.featured{ transform:none; }
+
+  .footer-grid{ grid-template-columns: 1fr; padding: 50px 22px 40px; }
+  .footer-bottom{ padding: 22px 22px 36px; flex-direction:column; }
+
+  .contact-form{ padding: 26px; }
+
+  section{ overflow-x:hidden; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior:auto !important; }
+}

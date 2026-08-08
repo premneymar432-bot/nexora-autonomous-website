@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA — Sign In</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <a class="brand" href="login.html">NEXORA</a>
+    <div class="auth-card">
+      <div class="eyebrow">AUTONOMOUS MOTION</div>
+      <h1>Welcome back.</h1>
+      <p class="subtitle">Sign in to continue to the Nexora experience.</p>
+
+      <form id="loginForm" novalidate>
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+
+        <label for="loginPassword">Password</label>
+        <div class="password-wrap">
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+          <button class="eye" type="button" data-toggle="loginPassword" aria-label="Show password">SHOW</button>
+        </div>
+
+        <button class="primary-btn" type="submit">SIGN IN <span>↗</span></button>
+        <p id="loginMessage" class="message" role="alert"></p>
+      </form>
+
+      <div class="switch">Don't have an account? <a href="signup.html">Create account</a></div>
+    </div>
+    <div class="fine-print">NEXORA // INTELLIGENCE IN MOTION</div>
+  </div>
+  <script src="auth.js"></script>
+</body>
+</html>

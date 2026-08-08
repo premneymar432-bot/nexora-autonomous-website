@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+  if (sessionStorage.getItem("nexoraLoggedIn") !== "true") {
+    window.location.replace("login.html");
+  }
+})();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NEXORA — Autonomous Motion</title>
+<meta name="description" content="NEXORA is a hyper-efficient electric performance brand. One intelligence. Infinite journeys.">
+
+<!-- ============ FONTS ============ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap">
+
+<!-- ============ STYLES ============ -->
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-mark" viewBox="0 0 100 100" width="72" height="72">
+      <polygon points="50,6 94,74 6,74" fill="none" stroke="url(#loaderGrad)" stroke-width="2.4" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="loaderGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7C3AED"/>
+          <stop offset="100%" stop-color="#38BDF8"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="loader-word">NEXORA</div>
+    <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderFill"></div></div>
+    <div class="loader-pct" id="loaderPct">00%</div>
+  </div>
+</div>
+
+<!-- =====================================================
+     CUSTOM CURSOR
+===================================================== -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- =====================================================
+     BACKGROUND LAYERS (mesh gradient / grid / noise)
+===================================================== -->
+<div class="bg-layer">
+  <div class="mesh-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="light-ray ray-1"></div>
+  <div class="light-ray ray-2"></div>
+  <div class="noise-overlay"></div>
+</div>
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" data-cursor="link">
+      <svg viewBox="0 0 100 100" width="26" height="26">
+        <polygon points="50,6 94,74 6,74" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+      </svg>
+      <span>NEXORA</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#about" data-cursor="link"><span>About</span></a>
+      <a href="#services" data-cursor="link"><span>Engineering</span></a>
+      <a href="#portfolio" data-cursor="link"><span>Models</span></a>
+      <a href="#stats" data-cursor="link"><span>Autonomy</span></a>
+      <a href="#testimonials" data-cursor="link"><span>Owners</span></a>
+      <a href="#pricing" data-cursor="link"><span>Configure</span></a>
+      <a href="#faq" data-cursor="link"><span>FAQ</span></a>
+    </nav>
+
+    <a href="#contact" class="btn btn-ghost nav-cta" data-cursor="link"><span>Reserve</span></a>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#services">Engineering</a>
+    <a href="#portfolio">Models</a>
+    <a href="#stats">Autonomy</a>
+    <a href="#testimonials">Owners</a>
+    <a href="#pricing">Configure</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="mobile-cta">Reserve</a>
+  </div>
+</header>
+
+<!-- =====================================================
+     MAIN SCROLL CONTAINER
+===================================================== -->
+<main id="smooth-wrapper">
+<div id="smooth-content">
+
+  <!-- =====================================================
+       1. HERO
+  ===================================================== -->
+  <section class="hero" id="hero">
+    <canvas id="webgl-hero"></canvas>
+
+    <div class="hero-content">
+      <p class="eyebrow reveal-up">THE AUTONOMY / SINCE 2026</p>
+      <h1 class="hero-title">
+        <span class="line reveal-up">DESIGNED</span>
+        <span class="line reveal-up">FOR AUTONOMY</span>
+        <span class="line reveal-up accent-text">BEYOND THE ROAD.</span>
+      </h1>
+      <p class="hero-sub reveal-up">One intelligent platform. Zero-emission mobility. Nexora combines AI perception, autonomous driving, and electric performance for a safer, smarter journey.</p>
+
+      <div class="hero-cta reveal-up">
+        <a href="#portfolio" class="btn btn-primary magnetic" data-cursor="link"><span>Explore Vehicles</span></a>
+        <a href="#contact" class="btn btn-outline magnetic" data-cursor="link"><span>Request a Drive</span></a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"><div class="scroll-dot"></div></div>
+    </div>
+
+    <div class="hero-stats-strip">
+      <div><strong>2.9s</strong><small>0–100 km/h</small></div>
+      <div><strong>600 km</strong><small>Range</small></div>
+      <div><strong>480 hp</strong><small>Peak Output</small></div>
+      <div><strong>250 km/h</strong><small>Top Speed</small></div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       2. ABOUT
+  ===================================================== -->
+  <section class="about" id="about">
+    <div class="section-inner about-grid">
+      <div class="about-visual">
+        <canvas id="webgl-about"></canvas>
+        <div class="about-visual-ring"></div>
+      </div>
+
+      <div class="about-copy">
+        <p class="eyebrow reveal-up">01 / ABOUT NEXORA</p>
+        <h2 class="section-title reveal-up">One intelligent platform, engineered to understand every journey.</h2>
+        <p class="reveal-up">Every Aurelia begins as one geometry: the Core — a machined energy cell that powers the drivetrain, tunes the chassis, and shapes the silhouette around it. Nothing is bolted on. Nothing is borrowed. It is designed inward-out, from physics to paint.</p>
+
+        <div class="about-cards">
+          <div class="mini-card tilt-card">
+            <span class="mini-card-num">01</span>
+            <h3>Human-Centered Design</h3>
+            <p>Every surface is designed around visibility, comfort, accessibility, and efficient electric mobility.</p>
+          </div>
+          <div class="mini-card tilt-card">
+            <span class="mini-card-num">02</span>
+            <h3>Intelligent Mobility</h3>
+            <p>AI-assisted driving combines perception, planning, and smooth electric control to respond intelligently to changing road conditions.</p>
+          </div>
+          <div class="mini-card tilt-card">
+            <span class="mini-card-num">03</span>
+            <h3>Responsible Technology</h3>
+            <p>Recyclable materials and efficient electric systems are designed to reduce the environmental footprint of every journey.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       3. SERVICES / ENGINEERING
+  ===================================================== -->
+  <section class="services" id="services">
+    <div class="section-inner">
+      <p class="eyebrow reveal-up center">02 / AUTONOMOUS TECHNOLOGY</p>
+      <h2 class="section-title reveal-up center">Six systems. One intelligent vehicle.</h2>
+
+      <div class="services-grid">
+        <article class="glass-card service-card">
+          <div class="service-icon">◈</div>
+          <h3>AI Perception</h3>
+          <p>Active surfaces recompute drag 1,000 times per second, sculpting airflow around the Core in real time.</p>
+        </article>
+        <article class="glass-card service-card">
+          <div class="service-icon">◇</div>
+          <h3>Electric Architecture</h3>
+          <p>A high-voltage electric platform provides efficient propulsion while supporting the vehicle’s computing and sensor systems.</p>
+        </article>
+        <article class="glass-card service-card">
+          <div class="service-icon">△</div>
+          <h3>Autonomous Driving</h3>
+          <p>Cameras, radar, and other sensors continuously interpret the surroundings to support navigation and driver-assistance decisions.</p>
+        </article>
+        <article class="glass-card service-card">
+          <div class="service-icon">◎</div>
+          <h3>Human Interface</h3>
+          <p>A clear digital interface keeps passengers informed about navigation, vehicle status, and autonomous driving decisions.</p>
+        </article>
+        <article class="glass-card service-card">
+          <div class="service-icon">▽</div>
+          <h3>Safety Systems</h3>
+          <p>Redundant sensing and intelligent monitoring are designed to help the vehicle detect obstacles, road users, and changing traffic conditions.</p>
+        </article>
+        <article class="glass-card service-card">
+          <div class="service-icon">◆</div>
+          <h3>AI Software</h3>
+          <p>Software updates can improve vehicle features, navigation, perception, and user experience over time.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       4. PORTFOLIO / MODELS
+  ===================================================== -->
+  <section class="portfolio" id="portfolio">
+    <div class="section-inner">
+      <p class="eyebrow reveal-up center">03 / VEHICLES</p>
+      <h2 class="section-title reveal-up center">Three vehicle types, one autonomous platform.</h2>
+
+      <div class="filter-bar reveal-up center">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="coupe">Sedan</button>
+        <button class="filter-btn" data-filter="roadster">SUV</button>
+        <button class="filter-btn" data-filter="gt">Shuttle</button>
+      </div>
+
+      <div class="masonry" id="masonry">
+        <div class="masonry-item " data-cat="coupe">
+          <div class="masonry-media vehicle-image"></div>
+          <img src="images/nexora-vision.png" alt="Nexora Vision">
+          <div class="masonry-info"><h4>Nexora Vision</h4><p>Sedan · 480 hp</p></div>
+        </div>
+        <div class="masonry-item" data-cat="roadster">
+          <div class="masonry-media vehicle-image"></div>
+          <img src="images/nexora-terra.png" alt="Nexora Terra">
+          <div class="masonry-info"><h4>Nexora Terra</h4><p>SUV · 940 hp</p></div>
+        </div>
+        <div class="masonry-item" data-cat="gt">
+          <div class="masonry-media vehicle-image"></div>
+          <img src="images/nexora-horizon.png" alt="Nexora Horizon">
+          <div class="masonry-info"><h4>Nexora Horizon</h4><p>Shuttle · 1,020 hp</p></div>
+        </div>
+        <div class="masonry-item" data-cat="coupe">
+          <div class="masonry-media vehicle-image"></div>
+          <img src="images/nexora-apex.png" alt="Nexora Vision S">
+          <div class="masonry-info"><h4>Nexora Vision S</h4><p>Sedan · 1,340 hp</p></div>
+        </div>
+        <div class="masonry-item" data-cat="roadster">
+          <div class="masonry-media vehicle-image"></div>
+          <img src="images/nexora-ranger.png" alt="Nexora Vision GT">
+          <div class="masonry-info"><h4>Nexora Terra GT</h4><p>SUV · 1,080 hp</p></div>
+        </div>
+        <div class="masonry-item" data-cat="gt">
+          <div class="masonry-media vehicle-image"></div>
+          <img src="images/nexora-shuttle.png" alt="Nexora Horizon Long">
+          <div class="masonry-info"><h4>Nexora Horizon Long</h4><p>Shuttle · 890 hp</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       5. STATISTICS
+  ===================================================== -->
+  <section class="stats" id="stats">
+    <div class="section-inner">
+      <p class="eyebrow reveal-up center">04 / AUTONOMOUS PERFORMANCE</p>
+      <h2 class="section-title reveal-up center">Technology measured for the real world.</h2>
+
+      <div class="stats-grid">
+        <div class="stat-block">
+          <div class="progress-ring" data-value="92">
+            <svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="52"/><circle class="ring-fill" cx="60" cy="60" r="52"/></svg>
+            <span class="progress-num" data-count="92">0</span>
+          </div>
+          <h4>Energy Recovery</h4><p>% energy recovered under braking</p>
+        </div>
+        <div class="stat-block">
+          <div class="progress-ring" data-value="78">
+            <svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="52"/><circle class="ring-fill" cx="60" cy="60" r="52"/></svg>
+            <span class="progress-num" data-count="78">0</span>
+          </div>
+          <h4>Perception</h4><p>% road environment coverage*</p>
+        </div>
+        <div class="stat-block">
+          <div class="progress-ring" data-value="96">
+            <svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="52"/><circle class="ring-fill" cx="60" cy="60" r="52"/></svg>
+            <span class="progress-num" data-count="96">0</span>
+          </div>
+          <h4>Battery Efficiency</h4><p>% usable energy efficiency*</p>
+        </div>
+        <div class="stat-block">
+          <div class="progress-ring" data-value="88">
+            <svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="52"/><circle class="ring-fill" cx="60" cy="60" r="52"/></svg>
+            <span class="progress-num" data-count="88">0</span>
+          </div>
+          <h4>Autonomous Readiness</h4><p>% assisted driving capability*</p>
+        </div>
+      </div>
+
+      <div class="counter-strip reveal-up">
+        <div><span class="counter" data-count="1180">0</span><small>Peak Power</small></div>
+        <div><span class="counter" data-count="412">0</span><small>Top Speed (km/h)</small></div>
+        <div><span class="counter" data-count="523">0</span><small>Range (km)</small></div>
+        <div><span class="counter" data-count="18">0</span><small>Min. 10–80% Charge</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       6. TESTIMONIALS
+  ===================================================== -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-inner">
+      <p class="eyebrow reveal-up center">05 / PASSENGERS</p>
+      <h2 class="section-title reveal-up center">A journey designed around you.</h2>
+    </div>
+
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="glass-card testi-card">
+          <p>"The Core doesn't feel like an engine swap — it feels like the car was born electric. Nothing about it apologizes for what it isn't."</p>
+          <div class="testi-author"><span>Prem Kumar SS</span><small>Vision Owner, Mandya</small></div>
+        </div>
+        <div class="glass-card testi-card">
+          <p>"I've owned three hypercars. This is the first one that updates itself to be better while I sleep."</p>
+          <div class="testi-author"><span>Thejas SK</span><small>Horizon Owner, Bangalore</small></div>
+        </div>
+        <div class="glass-card testi-card">
+          <p>"Silent at 300 km/h is a genuinely strange, wonderful feeling. The sound design team deserves an award of their own."</p>
+          <div class="testi-author"><span>Prajwal PV</span><small>Terra Owner, Mysore</small></div>
+        </div>
+        <div class="glass-card testi-card">
+          <p>"Eighteen minutes to charge is not a spec sheet number — I've timed it, at a real station, in traffic."</p>
+          <div class="testi-author"><span>Nandan KL</span><small>Vision S Owner, Singapore</small></div>
+        </div>
+        <!-- duplicate set for seamless infinite loop -->
+        <div class="glass-card testi-card">
+          <p>"The Core doesn't feel like an engine swap — it feels like the car was born electric. Nothing about it apologizes for what it isn't."</p>
+          <div class="testi-author"><span>Prem Kumar SS</span><small>Vision Owner, Mandya</small></div>
+        </div>
+        <div class="glass-card testi-card">
+          <p>"I've owned three hypercars. This is the first one that updates itself to be better while I sleep."</p>
+          <div class="testi-author"><span>Thejas SK</span><small>Horizon Owner, Bangalore</small></div>
+        </div>
+        <div class="glass-card testi-card">
+          <p>"Silent at 300 km/h is a genuinely strange, wonderful feeling. The sound design team deserves an award of their own."</p>
+          <div class="testi-author"><span>Prajwal PV</span><small>Terra Owner, Mysore</small></div>
+        </div>
+        <div class="glass-card testi-card">
+          <p>"Eighteen minutes to charge is not a spec sheet number — I've timed it, at a real station, in traffic."</p>
+          <div class="testi-author"><span>Nandan KL</span><small>Vision S Owner, Singapore</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       7. PRICING / CONFIGURE
+  ===================================================== -->
+  <section class="pricing" id="pricing">
+    <div class="section-inner">
+      <p class="eyebrow reveal-up center">06 / CONFIGURE</p>
+      <h2 class="section-title reveal-up center">Choose your autonomy.</h2>
+
+      <div class="pricing-grid">
+        <div class="glass-card price-card">
+          <h3>Essential</h3>
+          <div class="price">₹5,940,000</div>
+          <p class="price-desc">Single-motor electric platform with 600 km range.</p>
+          <ul>
+            <li>Efficient electric drivetrain</li>
+            <li>Advanced driver assistance</li>
+            <li>5-year vehicle warranty</li>
+            <li>OTA software updates</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline full magnetic" data-cursor="link"><span>Reserve Essential</span></a>
+        </div>
+
+        <div class="glass-card price-card featured">
+          <span class="price-badge">Most Popular</span>
+          <h3>Autonomy</h3>
+          <div class="price">₹8,582,000</div>
+          <p class="price-desc">Dual-motor Core, 480 hp, 600 km range.</p>
+          <ul>
+            <li>Intelligent all-wheel drive</li>
+            <li>AI perception suite</li>
+            <li>8-year vehicle warranty</li>
+            <li>Priority delivery slot</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary full magnetic" data-cursor="link"><span>Reserve Autonomy</span></a>
+        </div>
+
+        <div class="glass-card price-card">
+          <h3>Signature</h3>
+          <div class="price">₹12,320,000</div>
+          <p class="price-desc">Premium autonomous platform with bespoke interior and advanced sensing.</p>
+          <ul>
+            <li>Bespoke interior studio</li>
+            <li>Advanced autonomy package</li>
+            <li>Extended vehicle warranty</li>
+            <li>Personal mobility specialist</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline full magnetic" data-cursor="link"><span>Request Signature</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       8. FAQ
+  ===================================================== -->
+  <section class="faq" id="faq">
+    <div class="section-inner faq-grid">
+      <div>
+        <p class="eyebrow reveal-up">07 / QUESTIONS</p>
+        <h2 class="section-title reveal-up">Before your journey begins.</h2>
+        <p class="reveal-up">Can't find what you're looking for? Our delivery engineers answer configuration questions directly — reach out below.</p>
+      </div>
+
+      <div class="accordion" id="accordion">
+        <div class="accordion-item">
+          <button class="accordion-head">
+            <span>How long does delivery take after ordering?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body"><p>Essential and Autonomy configurations deliver in 6–9 months. Signature builds, being bespoke, run 10–14 months from final material sign-off.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-head">
+            <span>Can I upgrade autonomous features after purchase?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body"><p>Autonomy tuning ships over-the-air. Physical Core upgrades — motor count, battery architecture — must be done at a certified atelier before first registration.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-head">
+            <span>What does the vehicle warranty cover?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body"><p>Full coverage on the structural battery pack, both motors, and the drive inverter, plus one complimentary recalibration per year at any Aurelia atelier worldwide.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-head">
+            <span>Is home charging support included?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body"><p>Yes — every reservation includes a site survey and installation of an Aurelia 22kW home unit, or a credit toward existing compatible infrastructure.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-head">
+            <span>Can I switch to another vehicle model?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body"><p>Yes, at any point before final specification lock, with no change fee between Essential, Autonomy, and Signature configurations.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       9. CONTACT
+  ===================================================== -->
+  <section class="contact" id="contact">
+    <div class="section-inner contact-grid">
+      <div>
+        <p class="eyebrow reveal-up">08 / REQUEST A DRIVE</p>
+        <h2 class="section-title reveal-up">Start your autonomous journey.</h2>
+        <p class="reveal-up">Leave your details and a delivery engineer will contact you within one business day to walk through configuration and delivery windows.</p>
+
+        <div class="contact-meta reveal-up">
+          <div><small>NEXORA STUDIO</small><span>Mandya, India</span></div>
+          <div><small>EMAIL</small><span>premneymar432@gmail.com</span><span>tejassk64@gmail.com</span></div>
+          <div><small>PHONE</small><span>+91 9945258607</span><span>+91 9110421113</span></div>
+    
+        </div>
+      </div>
+
+      <form class="contact-form glass-card" id="contactForm">
+        <div class="form-field">
+          <input type="text" id="fname" required placeholder=" ">
+          <label for="fname">Full name</label>
+        </div>
+        <div class="form-field">
+          <input type="email" id="femail" required placeholder=" ">
+          <label for="femail">Email address</label>
+        </div>
+        <div class="form-field">
+          <input type="text" id="fmodel" placeholder=" ">
+          <label for="fmodel">Vehicle of interest</label>
+        </div>
+        <div class="form-field">
+          <textarea id="fmsg" rows="3" placeholder=" "></textarea>
+          <label for="fmsg">Message</label>
+        </div>
+        <button type="submit" class="btn btn-primary full magnetic" data-cursor="link"><span>Submit Request</span></button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       10. FOOTER
+  ===================================================== -->
+  <footer class="footer">
+    <div class="footer-gradient-line"></div>
+    <div class="section-inner footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" data-cursor="link">
+          <svg viewBox="0 0 100 100" width="24" height="24">
+            <polygon points="50,6 94,74 6,74" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+          </svg>
+          <span>NEXORA</span>
+        </a>
+        <p>One intelligence. Infinite journeys.</p>
+      </div>
+
+      <div class="footer-links">
+        <h5>Explore</h5>
+        <a href="#about">About</a>
+        <a href="#portfolio">Models</a>
+        <a href="#pricing">Configure</a>
+      </div>
+
+      <div class="footer-links">
+        <h5>Technology</h5>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#testimonials">Owners</a>
+      </div>
+
+      <div class="footer-social">
+        <h5>Connect</h5>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram" data-cursor="link" class="magnetic"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="X" data-cursor="link" class="magnetic"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></a>
+          <a href="#" aria-label="YouTube" data-cursor="link" class="magnetic"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9L15 12L10 15Z" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="LinkedIn" data-cursor="link" class="magnetic"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor"/><path d="M7.5 11V17M12 17V13.5C12 11.8 15 11.8 15 13.5V17" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="section-inner footer-bottom">
+      <span>© 2026 Nexora Mobility. Concept website.</span>
+      <span>Bengaluru · Mandya · Austin · Singapore</span>
+    </div>
+  </footer>
+
+</div>
+</main>
+
+<!-- ============ SCRIPTS ============ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+<script src="three-setup.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

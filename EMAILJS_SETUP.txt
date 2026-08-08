@@ -1,0 +1,42 @@
+NEXORA EMAILJS SETUP
+======================
+
+The reservation form is now connected to EmailJS.
+
+1. Create/sign in to an EmailJS account:
+   https://dashboard.emailjs.com/
+
+2. Add an Email Service and note its Service ID.
+
+3. Create an Email Template and set the recipient ("To Email") to YOUR email address.
+
+4. In the template, use these variables:
+   {{name}}
+   {{email}}
+   {{model}}
+   {{message}}
+
+   Example subject:
+   New Nexora Reservation Request — {{model}}
+
+5. In EmailJS Account/Public Keys, copy your Public Key.
+
+6. Open script.js and replace:
+   YOUR_PUBLIC_KEY
+   YOUR_SERVICE_ID
+   YOUR_TEMPLATE_ID
+
+   with your actual EmailJS values.
+
+7. Upload the complete project to GitHub Pages.
+
+IMPORTANT:
+- The EmailJS Public Key is intended for browser-side use.
+- Do not put an email account password, API secret, or private key into JavaScript.
+- The recipient email is configured inside your EmailJS template/service, not in this website code.
+
+FORM FIELDS SENT:
+- name
+- email
+- model
+- message
